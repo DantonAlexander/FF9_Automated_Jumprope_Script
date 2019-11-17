@@ -1,0 +1,47 @@
+; Manual override
+GetKeystate, state, Enter
+if (state = "D" and stop = 0)
+	{
+	break
+}
+
+timer := A_TickCount - start
+
+if (i = 1) {
+	currentInterval := a
+} else if (i = 21) {
+	currentInterval := b
+	balancer = 0
+} else if (i = 51) {
+	currentInterval := c
+	balancer = 0
+} else if (i = 101) {
+	currentInterval := d
+	balancer = 0
+} else if (i = 201) {
+	extraTime = 50
+	delay = 70
+	currentInterval := e
+	balancer = 0
+} else if (i = 260) {
+	extraTime = 20
+	balancer = 0
+} else if (i = 301) {
+	currentInterval := g
+	balancer = 0
+} else if (i = 500 or i = 800) {
+	currentInterval := g2
+} else if (i = 600 or i = 900) {
+	currentInterval := g
+} else if (i => 1001) {
+	if (Mod(i,2) = 0) {
+		currentInterval := g
+	} else {
+		currentInterval := g2
+	}
+}
+
+if(i > 1) {
+	DllCall("Sleep", "Uint", (currentInterval - timer + balancer + extraTime))
+}
+Gosub, jump
